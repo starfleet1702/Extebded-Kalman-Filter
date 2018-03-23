@@ -4,6 +4,7 @@
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
+using namespace std;
 
 Tools::Tools() {
 }
@@ -17,7 +18,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	 * Calculate the RMSE here.
 	 */
 	//Sum(sqrt(1/n(a-b)^2))
-
+	std::cout <<"Calculating RMSE" <<endl;
 	VectorXd rmse(4);
 	rmse << 0,0,0,0;
 
@@ -25,7 +26,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 
 	if((estimations_length==0) || (estimations_length!=ground_truth.size())){
 		std::cout<<"length of the estimation is either 0 or does not match with ground_truth!!!"<<endl;
-		return NULL;
+		return rmse;
 	}
 
 	for(unsigned long i=0;i<estimations_length;i++){
@@ -37,6 +38,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	rmse = rmse/estimations_length;
 	//calculating sqare root
 	rmse = rmse.array().sqrt();
+	std::cout<<"RMSE END"<<endl;
 	return rmse;
 }
 
@@ -44,7 +46,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 	/**
 	 * Calculate a Jacobian here.
 	 */
-
+	std::cout<<"Calculating Jacobian"<<endl;
 	MatrixXd Hj = MatrixXd::Zero(3, 4);
 	float min_val_threshold = 0.0001;
 	double px = x_state(0);
@@ -61,6 +63,6 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 				-(py/c1), (px/c1), 0.0, 0.0,
 				py*(vx*py - vy*px)/c3, px*(px*vy - py*vx)/c3, px/c2, py/c2;
 	}
-
+	std::cout<<"Jacobian End"<<endl;
 	return Hj;
 }
