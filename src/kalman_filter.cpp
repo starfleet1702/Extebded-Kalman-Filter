@@ -71,7 +71,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	
 	double r = sqrt(px*px+py*py);
 	double phi = r==0?0.0:atan2(py,px);
-	double drdt = r>0.0001 ?(px*vx+py*vy)/r:0.0;
+	double drdt = r>=0.0001 ?(px*vx+py*vy)/r:0.0;
 	x_polar<< r,phi,drdt;
 	
 	cout<<"x_polar calculated"<<endl;
@@ -83,7 +83,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	MatrixXd K = P_*H_.transpose()*S.inverse();
 	cout<<y.size()<<endl;
 	
-	x_ = x_+K*y;
+	x_ = x_+(K*y);
 	int x_size = x_.size();
 	MatrixXd I = MatrixXd::Identity(x_size,x_size);
 	P_ = (I-K*H_)*P_;
