@@ -1,3 +1,0 @@
-/mnt/c/Users/nishant.katariya/Extebded-Kalman-Filter/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/nishant.katariya/Extebded-Kalman-Filter/build/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/nishant.katariya/Extebded-Kalman-Filter/build/CMakeFiles/ExtendedKF.dir
